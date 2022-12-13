@@ -8,11 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    userId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-    },
+    userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
 
