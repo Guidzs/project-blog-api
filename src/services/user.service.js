@@ -18,6 +18,16 @@ const userRegister = async (user) => {
   return { token };
 };
 
+const findAll = async () => {
+  const result = await User.findAll();
+  const users = result.map((r) => {
+    const { password: _, ...user } = r.dataValues;
+    return user;
+  });
+  return users;
+};
+
 module.exports = {
   userRegister,
+  findAll,
 };

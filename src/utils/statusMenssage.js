@@ -3,6 +3,7 @@
 const SUCESS_CODE = 200;
 const CREATED_CODE = 201;
 const INVALID_CODE = 400;
+const UNAUTHORIZED_CODE = 401;
 const CONFLICT_CODE = 409;
 
 // STATUS MESSAGE's
@@ -13,12 +14,15 @@ const USER_ALREADY_REGISTERED = 'User already registered';
 const NAME_MUST_SHORT = '"displayName" length must be at least 8 characters long';
 const EMAIL_INVALID = '"email" must be a valid email';
 const PASSWORD_MUST_SHORT = '"password" length must be at least 6 characters long';
+const TOKEN_NOT_FOUND = 'Token not found';
+const TOKEN_INVALID = 'Expired or invalid token';
 
 module.exports = {
   // STATUS CODE's
   SUCESS_CODE,
   CREATED_CODE,
   INVALID_CODE,
+  UNAUTHORIZED_CODE,
   CONFLICT_CODE,
 
   // STATUS MESSAGE's
@@ -28,4 +32,6 @@ module.exports = {
   EMAIL_INVALID,
   NAME_MUST_SHORT,
   PASSWORD_MUST_SHORT,
+  TOKEN_NOT_FOUND,
+  TOKEN_INVALID,
 };

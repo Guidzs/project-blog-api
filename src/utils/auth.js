@@ -8,6 +8,9 @@ const JWT_CONFIG = {
 
 const createToken = (user) => jwt.sign(user, SECRET, JWT_CONFIG);
 
+const vevifyToken = (token) => jwt.verify(token, SECRET);
+
 module.exports = {
   createToken,
+  vevifyToken,
 };
