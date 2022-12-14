@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: DataTypes.INTEGER,
   }, {
     sequelize,
+    timestamps: false,
     underscored: true,
   });
 

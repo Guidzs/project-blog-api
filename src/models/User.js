@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
   }, {
     sequelize,
+    tableName: 'users',
+    timestamps: false,
     underscored: true,
   });
 
