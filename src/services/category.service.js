@@ -11,9 +11,7 @@ const createdCategory = async (name) => {
 };
 
 const findAll = async () => {
-  const result = await Category.findAll();
-  console.log(result);
-  const categories = result.map((r) => r.dataValues);
+  const categories = await Category.findAll();
   return categories;
 };
 
