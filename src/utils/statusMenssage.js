@@ -18,6 +18,7 @@ const PASSWORD_MUST_SHORT = '"password" length must be at least 6 characters lon
 const TOKEN_NOT_FOUND = 'Token not found';
 const TOKEN_INVALID = 'Expired or invalid token';
 const USER_NOT_FOUND = 'User does not exist';
+const NAME_REQUIRED = '"name" is required';
 
 module.exports = {
   // STATUS CODE's
@@ -38,4 +39,5 @@ module.exports = {
   TOKEN_NOT_FOUND,
   TOKEN_INVALID,
   USER_NOT_FOUND,
+  NAME_REQUIRED,
 };
