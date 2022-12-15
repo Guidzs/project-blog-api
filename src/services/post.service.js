@@ -1,14 +1,17 @@
-const { BlogPost, User, Category } = require('../models');
+const {
+  BlogPost,
+  User,
+  Category,
+  // PostCategory,
+  // sequelize,
+} = require('../models');
 
-const createdPost = async (userId, post, _categoryIds) => {
-  // const isCategoriesValid = categoryIds.some(async(id) => {
-  //   const category = await Category.findByPk(id);
-  //   if (!category) { return false; }
-  //   return true;
-  // });
-  // await Promise.all(isCategoriesValid);
-
-  // if (!isCategoriesValid) { return { error: true }; }
+const createdPost = async (userId, post, categoryIds) => {
+  const categories = await Category.findAll();
+  const isCategoriesValid = categoryIds
+    .every((id) => categories
+      .some((category) => category.id === id));
+  if (!isCategoriesValid) { return { error: true }; }
 
   const newPost = await BlogPost.create({
     title: post.title,
@@ -17,17 +20,14 @@ const createdPost = async (userId, post, _categoryIds) => {
     updated: new Date(),
     published: new Date(),
   });
+  // const t = await sequelize.transaction();
 
-  // const result = categoryIds.map((id) => PostsCategory.create({
-  //   postId: newPost.id,
-  //   categoryId: id,
-  // }, {
-  //   include: [
-  //     { association: BlogPost, name: 'postId', },
-  //     { association: Category, name: 'categoryId', },
-  //   ]
-  // }));
-  // await Promise.all(result);
+  // await Promise.all(
+  //   categoryIds.map(async (categoryId) => PostCategory.create(
+  //     { postId: newPost.id, categoryId },
+  //     { transaction: t },
+  //   )),
+  // );
 
   return newPost;
 };
