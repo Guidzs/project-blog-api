@@ -9,4 +9,6 @@ router.post('/', userValidate, userController.userRegister);
 
 router.get('/', tokenValidate, userController.findAll);
 
+router.get('/:id', tokenValidate, userController.getById);
+
 module.exports = router;

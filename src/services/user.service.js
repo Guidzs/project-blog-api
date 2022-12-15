@@ -27,7 +27,19 @@ const findAll = async () => {
   return users;
 };
 
+const getById = async (id) => {
+  if (!id) { return { error: true }; }
+  const [result] = await User.findAll({
+    where: { id },
+  });
+  console.log(result);
+  if (!result) { return { error: true }; }
+  const { password: _, ...user } = result.dataValues;
+  return user;
+};
+
 module.exports = {
   userRegister,
   findAll,
+  getById,
 };
