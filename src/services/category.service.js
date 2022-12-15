@@ -10,6 +10,14 @@ const createdCategory = async (name) => {
   return { id, name };
 };
 
+const findAll = async () => {
+  const result = await Category.findAll();
+  console.log(result);
+  const categories = result.map((r) => r.dataValues);
+  return categories;
+};
+
 module.exports = {
   createdCategory,
+  findAll,
 };
