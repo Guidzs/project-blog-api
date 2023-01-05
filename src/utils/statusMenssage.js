@@ -22,6 +22,7 @@ const NAME_REQUIRED = '"name" is required';
 const CATEGORY_NOT_FOUND = 'one or more "categoryIds" not found';
 const FIELDS_MISSING = 'Some required fields are missing';
 const POST_NOT_FOUND = 'Post does not exist';
+const UNAUTHORIZED_USER = 'Unauthorized user';
 
 module.exports = {
   // STATUS CODE's
@@ -46,4 +47,5 @@ module.exports = {
   CATEGORY_NOT_FOUND,
   FIELDS_MISSING,
   POST_NOT_FOUND,
+  UNAUTHORIZED_USER,
 };

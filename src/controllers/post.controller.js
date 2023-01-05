@@ -4,9 +4,11 @@ const {
   SUCESS_CODE,
   CREATED_CODE,
   INVALID_CODE,
+  UNAUTHORIZED_CODE,
   NOT_FOUND,
   CATEGORY_NOT_FOUND,
   POST_NOT_FOUND,
+  UNAUTHORIZED_USER,
 } = require('../utils/statusMenssage');
 
 const createdPost = async (req, res) => {
@@ -36,8 +38,24 @@ const findById = async (req, res) => {
   return res.status(SUCESS_CODE).json(post);
 };
 
+const postUpdate = async (req, res) => {
+  const { authorization } = req.headers;
+  const { id } = req.params;
+  const post = req.body;
+
+  const token = vevifyToken(authorization);
+  if (Number(id) !== token.id) {
+    return res.status(UNAUTHORIZED_CODE).json({ message: UNAUTHORIZED_USER });
+  }
+  await postService.postUpdate(Number(id), post);
+  const updatedPost = await postService.findById(Number(id));
+
+  return res.status(SUCESS_CODE).json(updatedPost);
+};
+
 module.exports = {
   createdPost,
   findAll,
   findById,
+  postUpdate,
 };
