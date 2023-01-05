@@ -2,8 +2,7 @@ const {
   BlogPost,
   User,
   Category,
-  // PostCategory,
-  // sequelize,
+  PostCategory,
 } = require('../models');
 
 const createdPost = async (userId, post, categoryIds) => {
@@ -20,14 +19,12 @@ const createdPost = async (userId, post, categoryIds) => {
     updated: new Date(),
     published: new Date(),
   });
-  // const t = await sequelize.transaction();
 
-  // await Promise.all(
-  //   categoryIds.map(async (categoryId) => PostCategory.create(
-  //     { postId: newPost.id, categoryId },
-  //     { transaction: t },
-  //   )),
-  // );
+  await Promise.all(
+    categoryIds.map(async (categoryId) => PostCategory.create(
+      { postId: newPost.id, categoryId },
+    )),
+  );
 
   return newPost;
 };
