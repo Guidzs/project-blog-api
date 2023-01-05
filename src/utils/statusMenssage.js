@@ -21,6 +21,7 @@ const USER_NOT_FOUND = 'User does not exist';
 const NAME_REQUIRED = '"name" is required';
 const CATEGORY_NOT_FOUND = 'one or more "categoryIds" not found';
 const FIELDS_MISSING = 'Some required fields are missing';
+const POST_NOT_FOUND = 'Post does not exist';
 
 module.exports = {
   // STATUS CODE's
@@ -44,4 +45,5 @@ module.exports = {
   NAME_REQUIRED,
   CATEGORY_NOT_FOUND,
   FIELDS_MISSING,
+  POST_NOT_FOUND,
 };

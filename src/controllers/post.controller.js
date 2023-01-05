@@ -2,9 +2,11 @@ const postService = require('../services/post.service');
 const { vevifyToken } = require('../utils/auth');
 const {
   SUCESS_CODE,
-  INVALID_CODE,
-  CATEGORY_NOT_FOUND,
   CREATED_CODE,
+  INVALID_CODE,
+  NOT_FOUND,
+  CATEGORY_NOT_FOUND,
+  POST_NOT_FOUND,
 } = require('../utils/statusMenssage');
 
 const createdPost = async (req, res) => {
@@ -25,7 +27,17 @@ const findAll = async (_req, res) => {
   return res.status(SUCESS_CODE).json(posts);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const post = await postService.findById(Number(id));
+  if (post.error) {
+    return res.status(NOT_FOUND).json({ message: POST_NOT_FOUND });
+  }
+  return res.status(SUCESS_CODE).json(post);
+};
+
 module.exports = {
   createdPost,
   findAll,
+  findById,
 };
