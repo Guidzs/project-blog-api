@@ -42,13 +42,14 @@ const postUpdate = async (req, res) => {
   const { authorization } = req.headers;
   const { id } = req.params;
   const post = req.body;
-
   const token = vevifyToken(authorization);
-  if (Number(id) !== token.id) {
-    return res.status(UNAUTHORIZED_CODE).json({ message: UNAUTHORIZED_USER });
+  
+  const result = await postService.postUpdate(Number(id), token.id, post);
+  const updatedPost = await postService.findById(id);
+
+  if (result.error) {
+      return res.status(UNAUTHORIZED_CODE).json({ message: UNAUTHORIZED_USER });
   }
-  await postService.postUpdate(Number(id), post);
-  const updatedPost = await postService.findById(Number(id));
 
   return res.status(SUCESS_CODE).json(updatedPost);
 };

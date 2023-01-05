@@ -59,12 +59,17 @@ const findById = async (id) => {
   return post;
 };
 
-const postUpdate = async (id, post) => {
+const postUpdate = async (id, userId, post) => {
+  const { user } = await findById(id);
+  console.log(user);
+  if (user.id !== userId) { return { error: true }; }
+
   await BlogPost.update(post, {
     where: {
       id,
     },
   });
+  return {};
 };
 
 module.exports = {
