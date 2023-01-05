@@ -3,6 +3,7 @@ const { vevifyToken } = require('../utils/auth');
 const {
   SUCESS_CODE,
   CREATED_CODE,
+  DELETE_CODE,
   INVALID_CODE,
   UNAUTHORIZED_CODE,
   NOT_FOUND,
@@ -54,9 +55,25 @@ const postUpdate = async (req, res) => {
   return res.status(SUCESS_CODE).json(updatedPost);
 };
 
+const postDelete = async (req, res) => {
+  const { authorization } = req.headers;
+  const { id } = req.params;
+  const token = vevifyToken(authorization);
+
+  const result = await postService.postDelete(Number(id), token.id);
+  if (result.error) {
+    return res.status(NOT_FOUND).json({ message: POST_NOT_FOUND });
+  }
+  if (result.err) {
+    return res.status(UNAUTHORIZED_CODE).json({ message: UNAUTHORIZED_USER });
+  }
+  return res.status(DELETE_CODE).send();
+};
+
 module.exports = {
   createdPost,
   findAll,
   findById,
   postUpdate,
+  postDelete,
 };

@@ -72,9 +72,23 @@ const postUpdate = async (id, userId, post) => {
   return {};
 };
 
+const postDelete = async (id, userId) => {
+  const post = await findById(id);
+  if (post.error) { return post; }
+  if (post.user.id !== userId) { return { err: true }; }
+
+  await BlogPost.destroy({
+    where: {
+      id,
+    },
+  });
+  return {};
+};
+
 module.exports = {
   createdPost,
   findAll,
   findById,
   postUpdate,
+  postDelete,
 };
