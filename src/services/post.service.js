@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const {
   BlogPost,
   User,
@@ -59,6 +60,26 @@ const findById = async (id) => {
   return post;
 };
 
+const findByText = async (text) => {
+  if (!text) {
+    const posts = await findAll();
+    return posts;
+  }
+
+  const posts = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: `%${text}%` } },
+        { content: { [Op.like]: `%${text}%` } }],
+    },
+    include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' },
+    ],
+  });
+
+  return posts;
+};
+
 const postUpdate = async (id, userId, post) => {
   const { user } = await findById(id);
   console.log(user);
@@ -89,6 +110,7 @@ module.exports = {
   createdPost,
   findAll,
   findById,
+  findByText,
   postUpdate,
   postDelete,
 };

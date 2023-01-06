@@ -39,6 +39,13 @@ const findById = async (req, res) => {
   return res.status(SUCESS_CODE).json(post);
 };
 
+const findByText = async (req, res) => {
+  const { q } = req.query;
+  const posts = await postService.findByText(q);
+
+  return res.status(SUCESS_CODE).json(posts);
+};
+
 const postUpdate = async (req, res) => {
   const { authorization } = req.headers;
   const { id } = req.params;
@@ -74,6 +81,7 @@ module.exports = {
   createdPost,
   findAll,
   findById,
+  findByText,
   postUpdate,
   postDelete,
 };

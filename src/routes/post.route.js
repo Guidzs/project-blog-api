@@ -9,6 +9,7 @@ router.post('/', tokenValidate, postValidate, postController.createdPost);
 
 router.get('/', tokenValidate, postController.findAll);
 router.get('/:id', tokenValidate, postController.findById);
+// router.get('/search', tokenValidate, postController.findByText);
 
 router.put('/:id', tokenValidate, postUpdateValidate, postController.postUpdate);
 
