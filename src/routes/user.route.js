@@ -11,4 +11,6 @@ router.get('/', tokenValidate, userController.findAll);
 
 router.get('/:id', tokenValidate, userController.getById);
 
+router.delete('/me', tokenValidate, userController.userDelete);
+
 module.exports = router;

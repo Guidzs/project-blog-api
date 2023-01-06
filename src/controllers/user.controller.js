@@ -1,6 +1,8 @@
 const userService = require('../services/user.service');
+const { vevifyToken } = require('../utils/auth');
 const {
   CREATED_CODE,
+  DELETE_CODE,
   CONFLICT_CODE,
   USER_ALREADY_REGISTERED,
   SUCESS_CODE,
@@ -36,8 +38,18 @@ const getById = async (req, res) => {
   return res.status(SUCESS_CODE).json(user);
 };
 
+const userDelete = async (req, res) => {
+  const { authorization } = req.headers;
+  const { id } = vevifyToken(authorization);
+  
+  await userService.userDelete(id);
+  
+  return res.status(DELETE_CODE).send();
+};
+
 module.exports = {
   userRegister,
   findAll,
   getById,
+  userDelete,
 };
